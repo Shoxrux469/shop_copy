@@ -9,14 +9,9 @@ let content = doc.querySelector(".content");
 let b_window = doc.querySelector(".b_window");
 let checkbox = doc.querySelector("#checkbox");
 let toggle = doc.querySelector(".toggle");
-// console.log(arr.slice(0, 5));
-// show_5.onclick = (e) => {
-//   e.preventDefault();
-// };
 create(arr);
 function create(arr) {
   let a;
-  // cont.innerHTML = "";
   for (let item of a || arr) {
     let mainDiv = doc.createElement("div");
     let mainImg = doc.createElement("img");
@@ -35,7 +30,7 @@ function create(arr) {
     let box2img = doc.createElement("img");
     let box3img = doc.createElement("img");
     let b_window_p = doc.createElement("p");
-
+    
     mainDiv.classList.add("mainDiv");
     mainImg.classList.add("mainImg");
     middleDiv.classList.add("middleDiv");
@@ -59,9 +54,7 @@ function create(arr) {
     box3img.setAttribute("src", "./icons/box.svg");
     
     h1.innerHTML = `${item.category} (${item.rating.count})`;
-    item.description.length > 100
-        ? item.description.slice(0, 90) + " <b>...read</b>"
-        : item.description;
+    p.innerHTML = item.description.length > 100 ? item.description.slice(0, 90) + " <b>...read</b>": item.description;
     box1p.innerHTML = item.price;
     box2p.innerHTML = item.rating.rate;
     box3p.innerHTML = item.rating.count;
@@ -78,10 +71,8 @@ function create(arr) {
     
     btn.onclick = (e) => {
       e.preventDefault();
-      console.log("click");
       box_num.innerHTML++;
       b_window_p.innerHTML = item.category
-      b_window_p.push(item.category)
     };
     show_5.onclick = (e) => {
       cont.innerHTML = "";
@@ -90,13 +81,6 @@ function create(arr) {
       create(a);
     };
     toggle.onclick = () => {
-      // if(checkbox.status !== 'checked'){
-      //   b_window.classList.remove('w_active')
-      //   alert('Not Hi');
-      // } else {
-        //   b_window.classList.add('w_active')
-        //   alert('Hi');
-        // }
           b_window.classList.toggle('w_active')
       }
   }
