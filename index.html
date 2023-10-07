@@ -137,9 +137,101 @@
             border-radius: 10px;
             background-color: #fff;
         }
-        .fill_box form{
+
+        .fill_box form {
             display: flex;
             gap: 6px;
+        }
+
+        #checkbox {
+            display: none;
+        }
+
+        .toggle {
+            position: relative;
+            width: 30px;
+            cursor: pointer;
+            margin: auto;
+            display: block;
+            height: calc(4px * 3 + 11px * 2);
+        }
+
+        .bar {
+            position: absolute;
+            left: 0;
+            right: 0;
+            height: 4px;
+            border-radius: calc(4px / 2);
+            background: #7b52b9;
+            color: inherit;
+            opacity: 1;
+            transition: none 0.35s cubic-bezier(.5, -0.35, .35, 1.5) 0s;
+        }
+
+        /***** Spin Animation *****/
+
+        .bar--top {
+            bottom: calc(50% + 8px + 4px/ 2);
+            transition-property: bottom, transform;
+            transition-delay: calc(0s + 0.35s), 0s;
+        }
+
+        .bar--middle {
+            top: calc(50% - 4px/ 2);
+            transition-property: opacity;
+            transition-delay: calc(0s + 0.35s);
+        }
+
+        .bar--bottom {
+            top: calc(50% + 8px + 4px/ 2);
+            transition-property: top, transform;
+            transition-delay: calc(0s + 0.35s), 0s;
+        }
+
+        #checkbox:checked+.toggle .bar--top {
+            bottom: calc(50% - 4px/ 2);
+            transform: rotate(135deg);
+            transition-delay: 0s, calc(0s + 0.35s);
+        }
+
+        #checkbox:checked+.toggle .bar--middle {
+            opacity: 0;
+            transition-duration: 0s;
+            transition-delay: calc(0s + 0.35s);
+        }
+
+        #checkbox:checked+.toggle .bar--bottom {
+            top: calc(50% - 4px/ 2);
+            transform: rotate(225deg);
+            transition-delay: 0s, calc(0s + 0.35s);
+        }
+
+        .burger {
+            position: fixed;
+            top: 30px;
+            right: 30px;
+            z-index: 20;
+        }
+        .b_window{
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            z-index: 10;
+            background-color: black;
+            left: 100%;
+            right: 0;
+            transition: 1s;
+            color: white;
+            padding: 100px 20px;
+        }
+        .content{
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            gap: 4px;
+        }
+        .w_active{
+            left: 57% !important;
         }
     </style>
     <title>Document</title>
@@ -147,7 +239,7 @@
 
 <body>
     <div class="fill_box">
-        <h1>В корзине: <span> </span> товар</h1>
+        <h1>В корзине: <span class="box_num">0</span> товар</h1>
         <form class="form">
             <button type="submit" class="show_5">Показать первые 5</button>
             <button type="submit" class="show_all">Показать все</button>
@@ -158,9 +250,21 @@
     <div class="container">
 
     </div>
+    <div class="burger">
+        <input type="checkbox" id="checkbox">
+        <label for="checkbox" class="toggle">
+            <div class="bar bar--top"></div>
+            <div class="bar bar--middle"></div>
+            <div class="bar bar--bottom"></div>
+        </label>
+    </div>
+    <div class="b_window">
+        <ul type="none" class="content">
 
+        </ul>
+    </div>
     <script type="module" src="./db.js"></script>
-    <script  type="module" src="./index.js"></script>
+    <script type="module" src="./index.js"></script>
 </body>
 
 </html>
